@@ -12,20 +12,23 @@ const client = new QueryClient({
             refetchOnReconnect:false,
             refetchOnWindowFocus:false,
             retry:false,
-            staleTime:60*5*1000
+            staleTime:60*5*1000,
+            placeholderData:(prevdata:any) =>prevdata
         }
     }
 })
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <QueryClientProvider client={client}>
+const rootElement = document.getElementById('root');
 
-    <App />
-  </QueryClientProvider>
-);
+if(rootElement){
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(
+        <QueryClientProvider client={client}>
+            <App />
+        </QueryClientProvider>
+    )
+}
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

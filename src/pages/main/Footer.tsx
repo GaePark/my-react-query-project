@@ -1,7 +1,7 @@
 import React from 'react';
 const Footer = () => {
     return (
-        <footer className="w-full bg-amber-100 mt-auto pt-2">
+        <footer className="w-full bg-neutral-300 mt-auto pt-5">
             <div className="mx-auto w-full max-w-7xl px-8">
                 <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
                     <h6 className="font-sans antialiased font-bold text-base md:text-lg lg:text-xl text-current mb-4">Material

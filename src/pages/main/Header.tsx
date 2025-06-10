@@ -1,39 +1,73 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+import {Link} from "react-router-dom";
 const Header = () => {
+    const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [login, setLogin] = useState<boolean>(false);
+    const [id, setId] = useState<string>("");
+    const [pwd, setPwd] = useState<string>("");
+    const idRef=useRef(null);
+    const pwdRef=useRef(null);
+    const menu = [
+        {title:"맛집", addr:"/food/1"},
+        {title:"레시피", addr:"/recipe/1"},
+        {title:"게시글", addr:"/board/1"},
+        {title:"뉴스", addr:"/news"},
+        {title:"채팅", addr:"/chat"},
+        {title:"고객센터", addr:"/customer"},
+    ]
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     return (
-        <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-amber-500 mb-3">
-            <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-                <div className="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
-                    <a className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white" href="#pablo">
-                        amber Color
-                    </a>
-                    <button className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none" type="button">
-                        <span className="block relative w-6 h-px rounded-sm bg-white"></span>
-                        <span className="block relative w-6 h-px rounded-sm bg-white mt-1"></span>
-                        <span className="block relative w-6 h-px rounded-sm bg-white mt-1"></span>
+        <nav className={`fixed top-0 left-0 w-full z-50 px-2 py-3 duration-500 shadow-md ${scrolled ? 'bg-white' : 'bg-black'}`} >
+            <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
+                {/* 로고 & 버튼 */}
+                <div className="flex justify-between w-full lg:w-auto">
+                    <Link className={`text-sm font-bold uppercase ${scrolled ? 'text-black' : 'text-white'}`} to="/">amber Color</Link>
+                    <button
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        className="lg:hidden text-xl focus:outline-none"
+                    >
+                        <span className={`block w-6 h-0.5 ${scrolled ? 'bg-black' : 'bg-white'} mb-1`}></span>
+                        <span className={`block w-6 h-0.5 ${scrolled ? 'bg-black' : 'bg-white'} mb-1`}></span>
+                        <span className={`block w-6 h-0.5 ${scrolled ? 'bg-black' : 'bg-white'} mb-1`}></span>
                     </button>
                 </div>
-                <div className="lg:flex flex-grow items-center">
-                    <ul className="flex flex-col lg:flex-row list-none ml-auto">
-                        <li className="nav-item">
-                            <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
-                                Discover
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
-                                Profile
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#pablo">
-                                Setting
-                            </a>
+
+                {/* 메뉴 */}
+                <div className={`w-full lg:flex lg:items-center lg:w-auto ${menuOpen ? 'block' : 'hidden'}`}>
+                    <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+                        {
+                            menu.map((el, i) => (
+                                <li key={i} className={"flex align-middle"}>
+                                    <Link
+                                        className={`block px-3 py-2 text-xs font-bold uppercase hover:opacity-75 ${
+                                            scrolled ? 'text-black' : 'text-white'
+                                        }`}
+                                        to={el.addr}
+                                    >
+                                        {el.title}
+                                    </Link>
+                                </li>
+                            ))
+                        }
+                        <li>
+                            <Link to={"/login"}
+                                className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-200 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-blue-500 hover:bg-blue-300 border-none text-stone-50 rounded-lg transition antialiased">
+                                로그인
+                            </Link>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
     );
 };
 
