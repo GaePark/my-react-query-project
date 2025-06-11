@@ -15,6 +15,9 @@ import FoodDetail from "./pages/food/FoodDetail";
 import ScrollToTop from "./components/ScrollToTop";
 import RecipeFind from "./pages/recipe/RecipeFind";
 import FoodFInd from "./pages/food/FoodFInd";
+import Login from "./pages/member/Login";
+import RequireAuth from "./components/RequireAuth";
+import BoardUpdate from "./pages/board/BoardUpdate";
 
 function App() {
 
@@ -25,6 +28,7 @@ function App() {
           <Header />
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/recipe/:page" element={<RecipeList/>} />
           <Route path="/recipe/find/:fd" element={<RecipeFind/>} />
           <Route path="/recipe/detail/:no" element={<RecipeDetail/>} />
@@ -33,7 +37,14 @@ function App() {
           <Route path="/food/detail/:fno" element={<FoodDetail/>} />
           <Route path="/board/:page" element={<BoardList/>} />
           <Route path="/board/detail/:no" element={<BoardDetail/>} />
-          <Route path="/board/insert" element={<BoardInsert/>} />
+          <Route path="/board/insert" element={<RequireAuth>
+                                                  <BoardInsert />
+                                              </RequireAuth>}
+          />
+            <Route path="/board/update/:no" element={<RequireAuth>
+                <BoardUpdate />
+            </RequireAuth>}
+            />
         </Routes>
 
           <Footer/>

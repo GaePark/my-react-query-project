@@ -45,9 +45,9 @@ export interface Board{
     name:string;
     subject:string;
     content:string;
-    pwd:string;
     dbday:string;
     hit:number;
+    id:string;
 }
 export interface BoardListData{
     list:Board[];

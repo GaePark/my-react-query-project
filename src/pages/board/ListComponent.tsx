@@ -1,26 +1,28 @@
 import React from 'react';
 import * as S from "./BoardStyled";
+import {Link} from "react-router-dom";
 
-/*
+
 interface ListProps {
-    title: string;
+    subject: string;
     content: string;
-    writer: string;
-    date: string;
+    name: string;
+    dbday: string;
     hit: number;
-    onClick?: () => void;
+    addr:string;
 }
-*/
 
-const ListComponent = () => {
+const ListComponent = ({subject,content,name,dbday,hit,addr}:ListProps) => {
     return (
         <S.ListBox >
-            <S.ListTitle>제목</S.ListTitle>
-            <S.ListText>내용</S.ListText>
+            <Link to={addr}>
+            <S.ListTitle>{subject}</S.ListTitle>
+            <S.ListText>{content}</S.ListText>
             <S.ListMeta>
-                <span>작성자: 작성자</span>
-                <span>작성일 · 조회수: 조회수</span>
+                <span>작성자: {name}</span>
+                <span>{dbday} · 조회수: {hit}</span>
             </S.ListMeta>
+            </Link>
         </S.ListBox>
     );
 };
