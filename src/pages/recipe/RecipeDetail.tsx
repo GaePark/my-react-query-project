@@ -5,6 +5,7 @@ import apiClient from "../../http-commons";
 import {AxiosResponse,AxiosError} from "axios";
 import {RecipeDetailResponse} from "../../types/types";
 import Loading from "../../components/Loading";
+import Comment from "../../components/Comment";
 
 const RecipeDetail = ():JSX.Element => {
         const type= useNavigationType();
@@ -92,7 +93,7 @@ const RecipeDetail = ():JSX.Element => {
                     ))
                 }
             </div>
-
+            <Comment fno={recipe.vo.no} type={"recipe"}/>
 
         </div>
     );

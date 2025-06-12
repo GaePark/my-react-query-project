@@ -9,9 +9,7 @@ const Header = () => {
         {title:"맛집", addr:"/food/1"},
         {title:"레시피", addr:"/recipe/1"},
         {title:"게시글", addr:"/board/1"},
-        {title:"뉴스", addr:"/news"},
-        {title:"채팅", addr:"/chat"},
-        {title:"고객센터", addr:"/customer"},
+        {title:"뉴스", addr:"/news"}
     ]
 
     useEffect(() => {
@@ -33,6 +31,7 @@ const Header = () => {
     }, []);
 
     const memberLogout= () => {
+        setMenuOpen(false);
         window.sessionStorage.clear();
         window.dispatchEvent(new Event("login"));
         nav("/")
@@ -40,9 +39,8 @@ const Header = () => {
     return (
         <nav className={`fixed top-0 left-0 w-full z-50 px-2 py-3 duration-500 shadow-md ${scrolled ? 'bg-white' : 'bg-black'}`} >
             <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
-                {/* 로고 & 버튼 */}
                 <div className="flex justify-between w-full lg:w-auto">
-                    <Link className={`text-sm font-bold uppercase ${scrolled ? 'text-black' : 'text-white'}`} to="/">Food</Link>
+                    <Link onClick={() => setMenuOpen(false)} className={`text-sm font-bold uppercase ${scrolled ? 'text-black' : 'text-white'}`} to="/">REACT-QUERY FOOD</Link>
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
                         className="lg:hidden text-xl focus:outline-none"
@@ -59,7 +57,7 @@ const Header = () => {
                         {
                             menu.map((el, i) => (
                                 <li key={i} className={"flex align-middle"}>
-                                    <Link
+                                    <Link onClick={() => setMenuOpen(false)}
                                         className={`block px-3 py-2 text-xs font-bold uppercase hover:opacity-75 ${
                                             scrolled ? 'text-black' : 'text-white'
                                         }`}
@@ -77,7 +75,8 @@ const Header = () => {
                                     로그아웃
                                 </button>
                                 ):(
-                                <Link to={"/login"}
+                                <Link onClick={() => setMenuOpen(false)}
+                                    to={"/login"}
                                       className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-200 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-blue-500 hover:bg-blue-300 border-none text-stone-50 rounded-lg transition antialiased">
                                     로그인
                                 </Link>

@@ -6,6 +6,7 @@ import {AxiosResponse,AxiosError} from "axios";
 import {Board} from "../../types/types";
 import Loading from "../../components/Loading";
 import * as S from "./BoardDetailStyle"
+import Comment from "../../components/Comment";
 const BoardDetail = () => {
     const id:string|null = window.sessionStorage.getItem("id");
     const {no} = useParams<{no:string}>();
@@ -84,6 +85,7 @@ const BoardDetail = () => {
 
                     <S.BoardBtn onClick={()=>nav(-1)} className={"bg-neutral-800 hover:bg-neutral-700"}>목록</S.BoardBtn>
                 </S.BoardBtnBox>
+            <Comment fno={board.no} type={"board"}/>
             </S.DetailBox>
         </S.Container>
     );

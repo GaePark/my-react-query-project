@@ -6,6 +6,7 @@ import {AxiosResponse,AxiosError} from "axios";
 import {FoodDetailData} from "../../types/types";
 import FoodMap from "./FoodMap";
 import Loading from "../../components/Loading";
+import Comment from "../../components/Comment";
 
 
 
@@ -147,6 +148,7 @@ const FoodDetail = ():JSX.Element => {
                 food &&
                 <FoodMap address={food.address} name={food.name} />
             }
+            <Comment fno={food.fno} type={"food"}/>
         </div>
     );
 };

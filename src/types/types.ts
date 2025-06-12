@@ -118,3 +118,12 @@ export interface FoodFindData{
     NUM:number;
 }
 
+export interface CommentInterface{
+    no:number;
+    fno:number;
+    id:string;
+    name:string;
+    msg:string;
+    type:string;
+    dbday:string;
+}

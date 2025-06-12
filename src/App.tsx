@@ -18,6 +18,7 @@ import FoodFInd from "./pages/food/FoodFInd";
 import Login from "./pages/member/Login";
 import RequireAuth from "./components/RequireAuth";
 import BoardUpdate from "./pages/board/BoardUpdate";
+import News from "./pages/news/News";
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
                 <BoardUpdate />
             </RequireAuth>}
             />
+            <Route path="/news" element={<News/>} />
         </Routes>
 
           <Footer/>

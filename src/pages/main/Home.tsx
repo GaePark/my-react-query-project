@@ -30,6 +30,14 @@ interface MainData {
         chef: string;
         num: number;
     }[];
+    bList:{
+        name:string;
+        subject:string;
+        hit:number;
+        no:number;
+        dbday:string;
+        num:string;
+    }[]
 
 }
 
@@ -64,7 +72,7 @@ const Home = () => {
                         className={`text-neutral-400 text-lg lg:text-2xl mt-7 ml-8 transition-all duration-700 delay-200 ease-out 
                         ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
                     >
-                        매일의 식사가 더 특별해질 수 있도록, 정성 가득한 레시피와 진짜 맛집 정보를 한곳에 담았습니다.
+                        매일의 식사가 더 특별해질 수 있도록, 정성 가득한 레시피와 <br/>진짜 맛집 정보를 한곳에 담았습니다.
                     </p>
                 </div>
             </div>
@@ -207,13 +215,26 @@ const Home = () => {
             </section>
             <section className="container px-4 mt-24 mx-auto">
                 <h3 className={"text-4xl font-bold mb-7"}>게시글</h3>
-                <table className={"table w-full table-fixed"}>
+                <table className={"table w-full table-fixed mb-10"}>
                     <tbody>
-                    <tr className={"border-t border-t-neutral-300"}>
-                        <td className={"text-center p-2 py-14 w-2/12 lg:w-1/12"}>작성자</td>
-                        <td className={"p-2 py-14 font-bold w-8/12 lg:w-10/12 text-2xl truncate overflow-hidden whitespace-nowrap"}>Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals</td>
-                        <td className={"text-center px-2 py-14 text-neutral-400 w-2/12 lg:w-1/12"}>작성일</td>
-                    </tr>
+                    {data?.data.bList.map((el, i) => (
+                        <tr key={i} className="border-t border-neutral-300 hover:bg-gray-50 transition">
+                            <td className="text-center p-3 w-2/12 lg:w-1/12 text-sm font-medium text-gray-700">
+                                {el.name}
+                            </td>
+                            <td className="p-3 w-8/12 lg:w-10/12 text-left">
+                                <Link
+                                    to={`/board/detail/${el.no}`}
+                                    className="block text-lg lg:text-xl font-semibold text-gray-800 truncate hover:underline"
+                                >
+                                    {el.subject}
+                                </Link>
+                            </td>
+                            <td className="text-center p-3 w-2/12 lg:w-1/12 text-sm text-gray-500">
+                                {el.dbday}
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </section>
